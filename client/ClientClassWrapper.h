@@ -29,5 +29,6 @@ private:
 
 
 	std::string m_szNetworkName;
+	std::string m_szNetTableName;
 	gcroot<IClientClass^> m_ClientClass;
 };

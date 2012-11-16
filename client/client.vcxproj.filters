@@ -28,6 +28,9 @@
     <Filter Include="Source Files\valve">
       <UniqueIdentifier>{8e902039-ca03-421f-83e0-651e75d0d1c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\native">
+      <UniqueIdentifier>{1dc81d39-89e7-4351-94c1-bd210dd5c2e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -69,9 +72,6 @@
     <ClInclude Include="ClientClassWrapper.h">
       <Filter>Source Files\wrappers</Filter>
     </ClInclude>
-    <ClInclude Include="ClientUnknownWrapper.h">
-      <Filter>Source Files\wrappers</Filter>
-    </ClInclude>
     <ClInclude Include="..\shared\ConCommandWrapper.h">
       <Filter>Source Files\wrappers</Filter>
     </ClInclude>
@@ -80,6 +80,15 @@
     </ClInclude>
     <ClInclude Include="..\shared\CVarWrapper.h">
       <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Source Files\native</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientUnknown.h">
+      <Filter>Source Files\native</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +137,6 @@
     <ClCompile Include="ClientClassWrapper.cpp">
       <Filter>Source Files\wrappers</Filter>
     </ClCompile>
-    <ClCompile Include="ClientUnknownWrapper.cpp">
-      <Filter>Source Files\wrappers</Filter>
-    </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\newbitbuf.cpp">
       <Filter>Source Files\valve</Filter>
     </ClCompile>
@@ -169,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="..\shared\MemAlloc.cpp">
       <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEntity.cpp">
+      <Filter>Source Files\native</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientUnknown.cpp">
+      <Filter>Source Files\native</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

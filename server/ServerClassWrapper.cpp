@@ -44,7 +44,19 @@ SendTable* CServerClassWrapper::CreateSendTable()
 	auto ret = new SendTable();
 	auto props = m_pServerClass->SendProps;
 
+	m_szNetworkTableName = marshal_as<std::string>(m_pServerClass->SendNetTableName);
+	ret->m_pNetTableName = (char*)m_szNetworkTableName.c_str();
+
+	if (props->Length == 0)
+	{
+		ret->m_nProps = 1;
+		ret->m_pProps = new SendProp[1];
+		ret->m_pProps[0] = SendPropInt("should_never_see_this", 0, sizeof(int));
+		return ret;
+	}
+
 	ret->m_pProps = new SendProp[props->Length];
+	ret->m_nProps = props->Length;
 	int x=0;
 
 	for each (auto p in props)

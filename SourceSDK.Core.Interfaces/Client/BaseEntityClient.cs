@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SourceSDK.Core.Interfaces.Client
 {
-    public class BaseEntityClient : M_IClientEntity
+    public class BaseEntityClient : IEntity
     {
         public BaseEntityClient()
         {
@@ -14,48 +14,6 @@ namespace SourceSDK.Core.Interfaces.Client
 
         public void Release()
         {
-        }
-
-        public M_ICollideable Collideable
-        {
-            get;
-            protected set;
-        }
-
-        public M_IClientNetworkable ClientNetworkable
-        {
-            get { return this; }
-        }
-
-        public M_IClientRenderable ClientRenderable
-        {
-            get { return this; }
-        }
-
-        public M_IClientEntity ClientEntity
-        {
-            get { return this; }
-        }
-
-        public BaseEntityClient BaseEntity
-        {
-            get { return this; }
-        }
-
-        public M_IClientThinkable ClientThinkable
-        {
-            get { return this; }
-        }
-
-        public BaseHandle BaseHandle
-        {
-            get;
-            set;
-        }
-
-        public M_IClientUnknown ClientUnknown
-        {
-            get { return this; }
         }
 
         public int Body
@@ -139,21 +97,9 @@ namespace SourceSDK.Core.Interfaces.Client
         {
         }
 
-
-        public IClientClass ClientClass
-        {
-            get;
-            protected set;
-        }
-
         public bool IsDormant
         {
             get { return false; }
-        }
-
-        public int EntIndex
-        {
-            get { return BaseHandle.EntityIndex; }
         }
 
         public void RecvMessage(int classId, byte[] message)
@@ -198,6 +144,42 @@ namespace SourceSDK.Core.Interfaces.Client
 
         public void Activate()
         {
+        }
+
+        public IEdict Edict
+        {
+            get;
+            set;
+        }
+
+        public int AreaNum
+        {
+            get;
+            set;
+        }
+
+        public IPvsInfo PvsInfo
+        {
+            get;
+            set;
+        }
+
+        public string ModelName
+        {
+            get;
+            set;
+        }
+
+        public int ModelIndex
+        {
+            get;
+            set;
+        }
+
+        public IEntityHandle Handle
+        {
+            get;
+            set;
         }
     }
 }

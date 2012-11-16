@@ -14,11 +14,11 @@ class CClientEntityWrapper;
 class C_BaseEntityWrapper;
 class CClientThinkableWrapper;
 
-class CClientUnknownWrapper : public IClientUnknown
+class CClientUnknown : public IClientUnknown
 {
 public:
-	CClientUnknownWrapper(M_IClientUnknown^ clientUnknown);
-	~CClientUnknownWrapper();
+	CClientUnknown(BaseEntityClient^ entity, int entnum, int serialNum);
+	~CClientUnknown();
 
 	ICollideable* GetCollideable() override;
 	IClientNetworkable* GetClientNetworkable() override;
@@ -38,6 +38,6 @@ private:
 	C_BaseEntityWrapper *m_pBaseEntity;
 	CClientThinkableWrapper *m_pClientThinkable;
 
-	CBaseHandle m_BaseHandle;
-	gcroot<M_IClientUnknown^> m_ClientClass;
+	CBaseHandle m_Handle;
+	gcroot<BaseEntityClient^> m_pEntity;
 };

@@ -27,12 +27,12 @@ namespace SourceSDK.Core.Server
             
         }
 
-        public IEdict BaseEntityToEdict(IBaseEntity entity)
+        public IEdict BaseEntityToEdict(IEntity entity)
         {
             return null;
         }
 
-        public IBaseEntity EdictToBaseEntity(IEdict edict)
+        public IEntity EdictToBaseEntity(IEdict edict)
         {
             return null;
         }

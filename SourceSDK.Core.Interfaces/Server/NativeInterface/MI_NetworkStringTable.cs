@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SourceSDK.Core.Interfaces.Shared
+namespace SourceSDK.Core.Interfaces.Server
 {
-    public interface IBaseEntity
+    public interface MI_NetworkStringTable
     {
     }
 }

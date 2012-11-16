@@ -23,6 +23,8 @@ protected:
 
 private:
 	std::string m_szNetworkName;
+	std::string m_szNetworkTableName;
+
 	std::vector<std::string> m_vPropNames;
 	std::vector<std::string> m_vPropStringVals;
 	std::vector<std::function<void (const SendProp *, const void *, const void *, DVariant *, int, int)>> m_vFunctions;

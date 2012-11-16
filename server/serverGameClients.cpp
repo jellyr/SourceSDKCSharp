@@ -5,6 +5,8 @@
 
 void CSourceSDKServerGameClients::GetPlayerLimits( int& minplayers, int& maxplayers, int &defaultMaxPlayers ) const
 {
+	minplayers = defaultMaxPlayers = 2; 
+	maxplayers = 16;
 }
 
 bool CSourceSDKServerGameClients::ClientConnect( edict_t *pEntity, const char *pszName, const char *pszAddress, char *reject, int maxrejectlen )

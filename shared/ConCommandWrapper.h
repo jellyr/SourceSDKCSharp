@@ -1,13 +1,6 @@
 #pragma once
 
-#include <gcroot.h>
 #include "tier1/convar.h"
-#include <string>
-
-using namespace SourceSDK;
-using namespace msclr::interop;
-using namespace System;
-using namespace System::Collections::Generic;
 using namespace SourceSDK::Core::Interfaces::Shared;
 
 namespace SourceSDK

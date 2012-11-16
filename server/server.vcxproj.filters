@@ -63,6 +63,18 @@
     <ClInclude Include="ServerClassWrapper.h">
       <Filter>Source Files\wrappers</Filter>
     </ClInclude>
+    <ClInclude Include="VEngineServerWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStringTableContainerWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStringTableWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVarsWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -133,6 +145,12 @@
     </ClCompile>
     <ClCompile Include="..\global_sdk\dt_utlvector_common.cpp">
       <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="VEngineServerWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkStringTableContainerWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

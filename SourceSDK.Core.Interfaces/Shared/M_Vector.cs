@@ -11,5 +11,7 @@ namespace SourceSDK.Core.Interfaces.Shared
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
+
+        public readonly static M_Vector Origin = new M_Vector();
     }
 }

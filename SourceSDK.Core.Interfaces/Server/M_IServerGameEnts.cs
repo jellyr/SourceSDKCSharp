@@ -13,8 +13,8 @@ namespace SourceSDK.Core.Interfaces.Server
 	    void MarkEntitiesAsTouching(IEdict e1, IEdict e2);
 	    void FreeContainingEntity(IEdict edict); 
 
-	    IEdict BaseEntityToEdict(IBaseEntity entity);
-	    IBaseEntity EdictToBaseEntity(IEdict edict);
+	    IEdict BaseEntityToEdict(IEntity entity);
+        IEntity EdictToBaseEntity(IEdict edict);
 
 	    void CheckTransmit(ICheckTransmitInfo info, UInt16[] edictIndices);
     }

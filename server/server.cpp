@@ -12,6 +12,14 @@
 #include "ServerInitInterfaces.h"
 #include "EdictWrapper.h"
 #include "ServerClassWrapper.h"
+#include "VEngineServerWrapper.h"
+#include "NetworkStringTableContainerWrapper.h"
+#include "GlobalVarsWrapper.h"
+
+#include "igameevents.h"
+
+// Holds global variables shared between engine and game.
+CGlobalVars *gpGlobals;
 
 
 ServerClass *g_pServerClassHead = nullptr;
@@ -22,15 +30,47 @@ using namespace msclr::interop;
 
 std::string GetModulePath();
 
+class CMockGameEventListener2 : public IGameEventListener2
+{
+public:
+	virtual void FireGameEvent(IGameEvent *event) override
+	{
+	}
+};
+
 bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfaceFn physicsFactory, CreateInterfaceFn fileSystemFactory, CGlobalVars *pGlobals)
 {
-	ICvar * pCvar = (ICvar*)appSystemFactory(CVAR_INTERFACE_VERSION, NULL);
+	gpGlobals = pGlobals;
+
+	auto pCvar = (ICvar*)appSystemFactory(CVAR_INTERFACE_VERSION, NULL);
 
 	if (!pCvar)
 		return false;
 
+	auto pEngine = (IVEngineServer*)appSystemFactory(INTERFACEVERSION_VENGINESERVER, NULL);
+
+	if (!pEngine)
+		return false;
+
+	auto pNetworkStringTable = (INetworkStringTableContainer *)appSystemFactory(INTERFACENAME_NETWORKSTRINGTABLESERVER,NULL);
+
+	if (!pNetworkStringTable)
+		return false;
+
+	auto gameeventmanager = (IGameEventManager2*)appSystemFactory(INTERFACEVERSION_GAMEEVENTSMANAGER2,NULL);
+
+	if (!gameeventmanager)
+		return false;
+
+	//If we dont do this engine.dll will crash
+	gameeventmanager->AddListener(new CMockGameEventListener2(), "player_connect", true);
+
+
 	ServerInitInterfaces^ sii = gcnew ServerInitInterfaces();
 	sii->ConsoleManager = gcnew SourceSDK::ConsoleManager(pCvar);
+	sii->EngineServer = gcnew VEngineServerWrapper(pEngine);
+	sii->NetworkStringTableContainer = gcnew NetworkStringTableContainerWrapper(pNetworkStringTable);
+	sii->GlobalVars = gcnew GlobalVarsWrapper();
 
 	ServerInterfaces = sii;
 
@@ -46,12 +86,10 @@ bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfa
 
 
 
+
+
 //	// init each (seperated for ease of debugging)
-//	if ( (engine = (IVEngineServer*)appSystemFactory(INTERFACEVERSION_VENGINESERVER, NULL)) == NULL )
-//		return false;
 //	if ( (g_pVoiceServer = (IVoiceServer*)appSystemFactory(INTERFACEVERSION_VOICESERVER, NULL)) == NULL )
-//		return false;
-//	if ( (networkstringtable = (INetworkStringTableContainer *)appSystemFactory(INTERFACENAME_NETWORKSTRINGTABLESERVER,NULL)) == NULL )
 //		return false;
 //	if ( (staticpropmgr = (IStaticPropMgrServer *)appSystemFactory(INTERFACEVERSION_STATICPROPMGR_SERVER,NULL)) == NULL )
 //		return false;
@@ -67,8 +105,7 @@ bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfa
 //		return false;
 //	if ( (filesystem = (IFileSystem *)fileSystemFactory(FILESYSTEM_INTERFACE_VERSION,NULL)) == NULL )
 //		return false;
-//	if ( (gameeventmanager = (IGameEventManager2 *)appSystemFactory(INTERFACEVERSION_GAMEEVENTSMANAGER2,NULL)) == NULL )
-//		return false;
+
 //	if ( (datacache = (IDataCache*)appSystemFactory(DATACACHE_INTERFACE_VERSION, NULL )) == NULL )
 //		return false;
 //	if ( (soundemitterbase = (ISoundEmitterSystemBase *)appSystemFactory(SOUNDEMITTERSYSTEM_INTERFACE_VERSION, NULL)) == NULL )
@@ -95,6 +132,29 @@ bool CSourceSDKServer::GameInit()
 
 bool CSourceSDKServer::LevelInit(char const *pMapName, char const *pMapEntities, char const *pOldLevel, char const *pLandmarkName, bool loadGame, bool background)
 {
+	if ( loadGame )
+	{
+		if ( pOldLevel )
+		{
+			gpGlobals->eLoadType = MapLoad_Transition;
+		}
+		else
+		{
+			gpGlobals->eLoadType = MapLoad_LoadGame;
+		}
+	}
+	else
+	{
+		if ( background )
+		{
+			gpGlobals->eLoadType = MapLoad_Background;
+		}
+		else
+		{
+			gpGlobals->eLoadType = MapLoad_NewGame;
+		}
+	}
+
 	return ServerInterfaces->ServerGameDll->LevelInit(gcnew String(pMapName), gcnew String(pMapEntities), gcnew String(pOldLevel), gcnew String(pLandmarkName), loadGame, background);
 }
 
@@ -167,13 +227,18 @@ ServerClass* CSourceSDKServer::GetAllServerClasses()
 
 	for (size_t x=0; x<vList.size(); x++)
 	{
-		if (g_pServerClassHead)
-			g_pServerClassHead->m_pNext = vList[x];
-
-		g_pServerClassHead = vList[x];
+		if (x == 0)
+		{
+			g_pServerClassHead = vList[x];
+			g_pServerClassHead->m_pNext = nullptr;
+		}
+		else
+		{
+			vList[x]->m_pNext = g_pServerClassHead;
+			g_pServerClassHead = vList[x];
+		}		
 	}
 
-	//todo make sure a->z
 	return g_pServerClassHead;
 }
 
@@ -257,9 +322,7 @@ bool CSourceSDKServer::GetUserMessageInfo(int msg_type, char *name, int maxnamel
 
 CStandardSendProxies* CSourceSDKServer::GetStandardSendProxies()
 {
-	auto proxies = ServerInterfaces->ServerGameDll->GetStandardSendProxies();
-
-	return nullptr;
+	return &g_StandardSendProxies;
 }
 
 void CSourceSDKServer::PostInit()

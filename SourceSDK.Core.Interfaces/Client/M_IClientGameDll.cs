@@ -64,7 +64,7 @@ namespace SourceSDK.Core.Interfaces.Client
         void DecodeUserCmdFromBuffer(ref byte[] buffer, int slot);
 
 
-	    void ViewRender(M_VRect[] rects);
+	    void ViewRender(M_VRect rect);
 	    void RenderView(M_ViewSetup viewsetup, int nClearFlags, int whatToDraw);
 	    void ViewFade(M_ScreenFade screenFade);
 	

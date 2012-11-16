@@ -86,6 +86,9 @@
     <ClInclude Include="..\shared\ConsoleManager.h" />
     <ClInclude Include="..\shared\CVarWrapper.h" />
     <ClInclude Include="EdictWrapper.h" />
+    <ClInclude Include="GlobalVarsWrapper.h" />
+    <ClInclude Include="NetworkStringTableContainerWrapper.h" />
+    <ClInclude Include="NetworkStringTableWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="ServerClassWrapper.h" />
@@ -93,6 +96,7 @@
     <ClInclude Include="serverGameEnts.h" />
     <ClInclude Include="ServerInitInterfaces.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="VEngineServerWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\global_sdk\dt_send.cpp">
@@ -130,6 +134,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="NetworkStringTableContainerWrapper.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="ServerClassWrapper.cpp" />
     <ClCompile Include="ServerDll.cpp" />
@@ -139,6 +144,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="VEngineServerWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

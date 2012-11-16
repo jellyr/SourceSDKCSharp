@@ -1,10 +1,12 @@
 #include "Stdafx.h"
 #include <msclr\marshal_cppstd.h>
 #include "ClientClassWrapper.h"
-#include "ClientUnknownWrapper.h"
 #include "dt_recv.h"
 
+#include "BaseEntity.h"
 
+
+using namespace SourceSDK::Core::Interfaces::Shared;
 using namespace msclr::interop;
 using namespace System;
 
@@ -12,115 +14,6 @@ typedef void (RecvVarProxyFnNoPtr)( const CRecvProxyData *pData, void *pStruct, 
 typedef IClientNetworkable*	(*CreateClientClassFnNoPtr)( int entnum, int serialNum );
 typedef IClientNetworkable*	(*CreateEventFnNoPtr)();
 
-
-class CClientNetworkable : public IClientNetworkable
-{
-public:
-	CClientNetworkable(CClientClassWrapper* pClientClass)
-	{
-		m_pClientUnknown = nullptr;
-		m_pClientClass = pClientClass;
-		m_nEntIndex = -1;
-
-		m_Networkable = pClientClass->Get()->Create();
-	}
-
-	CClientNetworkable(int entnum, int serialNum, CClientClassWrapper* pClientClass)
-	{
-		m_pClientUnknown = nullptr;
-		m_pClientClass = pClientClass;
-		m_nEntIndex = entnum;
-
-		m_Networkable = pClientClass->Get()->Create(entnum, serialNum);
-	}
-
-	~CClientNetworkable()
-	{
-		delete m_pClientUnknown;
-	}
-
-	IClientUnknown*	GetIClientUnknown() override
-	{
-		if (m_pClientUnknown)
-			return m_pClientUnknown;
-
-		auto unknown = m_Networkable->ClientUnknown;
-
-		if (!unknown)
-			return nullptr;
-
-		m_pClientUnknown = new CClientUnknownWrapper(unknown);
-		return m_pClientUnknown;
-	}
-
-	void Release() override
-	{
-		m_Networkable->Release();
-		delete this;
-	}
-
-	ClientClass* GetClientClass() override
-	{
-		return m_pClientClass;
-	}
-
-	void NotifyShouldTransmit(ShouldTransmitState_t state) override
-	{
-	}
-
-	void OnPreDataChanged(DataUpdateType_t updateType) override
-	{
-	}
-
-	void OnDataChanged(DataUpdateType_t updateType) override
-	{
-	}
-
-	void PreDataUpdate(DataUpdateType_t updateType) override
-	{
-	}
-
-	void PostDataUpdate(DataUpdateType_t updateType) override
-	{
-	}
-
-	bool IsDormant() override
-	{
-		return false;
-	}
-
-	int entindex() const override
-	{
-		return m_nEntIndex;
-	}
-
-	void ReceiveMessage(int classID, bf_read &msg) override
-	{
-	}
-
-	// Get the base pointer to the networked data that GetClientClass->m_pRecvTable starts at.
-	// (This is usually just the "this" pointer).
-	void* GetDataTableBasePtr() override
-	{
-		Assert(false); //check
-		return m_pClientClass;
-	}
-
-	virtual void SetDestroyedOnRecreateEntities()
-	{
-	}
-
-	M_IClientNetworkable^ Get()
-	{
-		return m_Networkable;
-	}
-
-private:
-	int m_nEntIndex;
-	CClientUnknownWrapper *m_pClientUnknown;
-	CClientClassWrapper *m_pClientClass;
-	gcroot<M_IClientNetworkable^> m_Networkable;
-};
 
 class CRecvPropWrapper
 {
@@ -159,7 +52,7 @@ CClientClassWrapper::CClientClassWrapper(IClientClass^ clientClass)
 	{
 		m_CreateEvent = [&]() -> IClientNetworkable*
 		{
-			return new CClientNetworkable(this);
+			return new CBaseEntity(this);
 		};
 
 		m_pCreateEventFn = (CreateEventFn)m_CreateEvent.target<CreateEventFnNoPtr>();
@@ -168,7 +61,7 @@ CClientClassWrapper::CClientClassWrapper(IClientClass^ clientClass)
 	{
 		m_CreateEntity = [&](int entnum, int serialNum) -> IClientNetworkable*
 		{
-			return new CClientNetworkable(entnum, serialNum, this);
+			return new CBaseEntity(this, entnum, serialNum);
 		};
 
 		m_pCreateFn = (CreateClientClassFn)m_CreateEntity.target<CreateClientClassFnNoPtr>();
@@ -177,11 +70,20 @@ CClientClassWrapper::CClientClassWrapper(IClientClass^ clientClass)
 
 RecvTable* CClientClassWrapper::CreateRecvTable()
 {
+	m_szNetTableName = marshal_as<std::string>(m_ClientClass->RecvNetTableName);
+
 	auto pRt = new RecvTable();
 	pRt->m_nProps = m_ClientClass->RecvProps->Length;
+	pRt->m_pNetTableName = (char*)m_szNetTableName.c_str();
 
 	if (pRt->m_nProps == 0)
+	{
+		pRt->m_nProps = 1;
+		pRt->m_pProps = new RecvProp[1];
+		pRt->m_pProps[0] = RecvPropInt("should_never_see_this", 0, sizeof(int));
+
 		return pRt;
+	}
 
 	auto props = new RecvProp[pRt->m_nProps];
 
@@ -198,7 +100,7 @@ RecvTable* CClientClassWrapper::CreateRecvTable()
 		case DPT_Int:
 			{
 				auto funct = [&pw](const CRecvProxyData *pData, void *pStruct, void *pOut){
-					auto o = static_cast<CClientNetworkable*>(pOut)->Get();
+					auto o = static_cast<CBaseEntity*>(pOut)->Get();
 					pw.Get()->SetValue(o, pData->m_Value.m_Int);
 				};
 
@@ -210,7 +112,7 @@ RecvTable* CClientClassWrapper::CreateRecvTable()
 		case DPT_Float:
 			{
 				auto funct = [&pw](const CRecvProxyData *pData, void *pStruct, void *pOut){
-					auto o = static_cast<CClientNetworkable*>(pOut)->Get();
+					auto o = static_cast<CBaseEntity*>(pOut)->Get();
 					pw.Get()->SetValue(o, pData->m_Value.m_Float);
 				};
 
@@ -222,7 +124,7 @@ RecvTable* CClientClassWrapper::CreateRecvTable()
 		case DPT_String:
 			{
 				auto funct = [&pw](const CRecvProxyData *pData, void *pStruct, void *pOut){
-					auto o = static_cast<CClientNetworkable*>(pOut)->Get();
+					auto o = static_cast<CBaseEntity*>(pOut)->Get();
 					pw.Get()->SetValue(o, gcnew String(pData->m_Value.m_pString));
 				};
 

@@ -21,6 +21,16 @@ namespace SourceSDK.Core.Interfaces
             return _Container.GetExportedValue<T>();
         }
 
+        public static T GetExportedValue<T>(string className)
+        {
+            return _Container.GetExportedValue<T>(className);
+        }
+
+        public static IEnumerable<Lazy<T>> GetExports<T>()
+        {
+            return _Container.GetExports<T>();
+        }
+
         public static IEnumerable<T> GetExportedValues<T>()
         {
             return _Container.GetExportedValues<T>();
@@ -58,9 +68,19 @@ namespace SourceSDK.Core.Interfaces
             return _Container.GetExportedValue<T>();
         }
 
+        public static T GetExportedValue<T>(string className)
+        {
+            return _Container.GetExportedValue<T>(className);
+        }
+
         public static IEnumerable<T> GetExportedValues<T>()
         {
             return _Container.GetExportedValues<T>();
+        }
+
+        public static IEnumerable<Lazy<T>> GetExports<T>()
+        {
+            return _Container.GetExports<T>();
         }
 
         public static void Init(Assembly entryAssembly)

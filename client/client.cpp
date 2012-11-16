@@ -240,10 +240,13 @@ bool CSourceSDKClient::WriteUsercmdDeltaToBuffer(bf_write *buf, int from, int to
 	cli::array<byte,1>^ outBuff = nullptr;
 	ClientInterfaces->ClientGameDll->WriteUserCmdDeltaToBuffer(outBuff, from, to, isnewcommand);
 
+	if (outBuff == nullptr || outBuff->Length == 0)
+		return false;
+
 	cli::pin_ptr<byte> byteArry = &outBuff[0];
 	buf->WriteBytes(byteArry, outBuff->Length);
 
-	return false;
+	return true;
 }
 
 void CSourceSDKClient::EncodeUserCmdToBuffer(bf_write& buf, int slot)
@@ -251,9 +254,12 @@ void CSourceSDKClient::EncodeUserCmdToBuffer(bf_write& buf, int slot)
 	cli::array<byte,1>^ outBuff = nullptr;
 	ClientInterfaces->ClientGameDll->EncodeUserCmdToBuffer(outBuff, slot);
 
-	cli::pin_ptr<byte> byteArry = &outBuff[0];
-
 	buf.WriteLong(outBuff->Length);
+
+	if (outBuff->Length == 0)
+		return;
+
+	cli::pin_ptr<byte> byteArry = &outBuff[0];
 	buf.WriteBytes(byteArry, outBuff->Length);
 }
 
@@ -270,26 +276,13 @@ void CSourceSDKClient::DecodeUserCmdFromBuffer(bf_read& buf, int slot)
 
 void CSourceSDKClient::View_Render(vrect_t *rect)
 {
-	std::vector<vrect_t*> vList;
+	auto r = gcnew M_VRect();
+	r->X = rect->x;
+	r->Y = rect->y;
+	r->Width = rect->width;
+	r->Height = rect->height;
 
-	while (rect)
-	{
-		vList.push_back(rect);
-		rect = rect->pnext;
-	}
-
-	auto items = gcnew cli::array<M_VRect^, 1>(vList.size());
-
-	for (size_t x=0; x<vList.size(); x++)
-	{
-		items[x] = gcnew M_VRect();
-		items[x]->X = vList[x]->x;
-		items[x]->Y = vList[x]->y;
-		items[x]->Width = vList[x]->width;
-		items[x]->Height = vList[x]->height;
-	}
-
-	ClientInterfaces->ClientGameDll->ViewRender(items);
+	ClientInterfaces->ClientGameDll->ViewRender(r);
 }
 
 void CSourceSDKClient::RenderView(const CViewSetup &view, int nClearFlags, int whatToDraw)
@@ -425,9 +418,7 @@ void CSourceSDKClient::EmitCloseCaption(char const *captionname, float duration)
 
 CStandardRecvProxies* CSourceSDKClient::GetStandardRecvProxies()
 {
-	auto proxies = ClientInterfaces->ClientGameDll->GetStandardRecvProxies();
-
-	return nullptr;
+	return &g_StandardRecvProxies;
 }
 
 

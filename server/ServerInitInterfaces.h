@@ -22,6 +22,8 @@ public:
 	virtual property NI_ServerPluginHelpers^ ServerPluginHelpers;
 	virtual property NI_ScenceFileCache^ SceneFileCache;
 
+	virtual property NI_GlobalVars^ GlobalVars;
+
 	virtual property M_IServerGameDll^ ServerGameDll;
 	virtual property M_IServerGameClients^ ServerGameClients;
 	virtual property M_IServerGameEnts^ ServerGameEnts;

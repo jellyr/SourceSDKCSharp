@@ -10,12 +10,20 @@ ref class EdictWrapper : public IEdict
 public:
 	EdictWrapper(const edict_t edict)
 	{
+		m_bDelete = true;
 		m_pEdict = new edict_t(edict);
+	}
+
+	EdictWrapper(edict_t* edict)
+	{
+		m_bDelete = false;
+		m_pEdict = edict;
 	}
 
 	~EdictWrapper()
 	{
-		delete m_pEdict;
+		if (m_bDelete)
+			delete m_pEdict;
 	}
 
 	virtual property String^ ClassName
@@ -26,6 +34,12 @@ public:
 		}
 	}
 
+	edict_t* Get()
+	{
+		return m_pEdict;
+	}
+
 private:
+	bool m_bDelete;
 	edict_t *m_pEdict;
 };

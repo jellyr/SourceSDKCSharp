@@ -34,6 +34,9 @@ namespace SourceSDK.Core
 
             LoadMefTypes<IClientInitInterfaces>(initInterfaces, typeof(MefClient));
 
+            var entMng = MefClient.GetExportedValue<IEntityManagerClient>();
+            entMng.GenerateClientClasses();
+
             var consoleManager = MefClient.GetExportedValue<NI_ConsoleManager>();
 
             foreach (var conCommand in MefClient.GetExportedValues<IConCommand>())
@@ -51,6 +54,9 @@ namespace SourceSDK.Core
             MefServer.AddType<IGameInfo>(new GameInfo(true));
 
             LoadMefTypes<IServerInitInterfaces>(initInterfaces, typeof(MefServer));
+
+            MefServer.GetExportedValue<IEntityManager>().GenerateServerClasses();
+
 
             var consoleManager = MefServer.GetExportedValue<NI_ConsoleManager>();
 

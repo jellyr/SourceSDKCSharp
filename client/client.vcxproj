@@ -88,15 +88,17 @@
     <ClInclude Include="..\shared\ConCommandWrapper.h" />
     <ClInclude Include="..\shared\ConsoleManager.h" />
     <ClInclude Include="..\shared\CVarWrapper.h" />
+    <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="centerPrint.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="ClientClassWrapper.h" />
     <ClInclude Include="clientEntityList.h" />
     <ClInclude Include="ClientInitInterfaces.h" />
     <ClInclude Include="clientLeafSystem.h" />
-    <ClInclude Include="ClientUnknownWrapper.h" />
+    <ClInclude Include="ClientUnknown.h" />
     <ClInclude Include="EngineSprite.h" />
     <ClInclude Include="gameClientExports.h" />
+    <ClInclude Include="HandleWrapper.h" />
     <ClInclude Include="prediction.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
@@ -144,13 +146,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="centerprint.cpp" />
     <ClCompile Include="client.cpp" />
     <ClCompile Include="ClientClassWrapper.cpp" />
     <ClCompile Include="ClientDll.cpp" />
     <ClCompile Include="clientEntityList.cpp" />
     <ClCompile Include="clientLeafSystem.cpp" />
-    <ClCompile Include="ClientUnknownWrapper.cpp" />
+    <ClCompile Include="ClientUnknown.cpp" />
     <ClCompile Include="gameClientExports.cpp" />
     <ClCompile Include="Prediction.cpp" />
     <ClCompile Include="Stdafx.cpp">

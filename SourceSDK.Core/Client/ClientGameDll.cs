@@ -12,6 +12,14 @@ namespace SourceSDK.Core.Client
     [Export(typeof(M_IClientGameDll))]
     class ClientGameDll : M_IClientGameDll
     {
+        IEntityManagerClient _EntManager;
+
+        [ImportingConstructor]
+        public ClientGameDll(IEntityManagerClient entManager)
+        {
+            _EntManager = entManager;
+        }
+
         public void PostInit()
         {
             
@@ -39,7 +47,7 @@ namespace SourceSDK.Core.Client
 
         public IClientClass[] GetAllClasses()
         {
-            return null;
+            return _EntManager.ClientClasses;
         }
 
         public int HudVidinit()
@@ -127,7 +135,7 @@ namespace SourceSDK.Core.Client
             
         }
 
-        public void ViewRender(M_VRect[] rects)
+        public void ViewRender(M_VRect rect)
         {
             
         }

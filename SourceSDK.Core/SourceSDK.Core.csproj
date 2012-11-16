@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ClientClass.cs" />
     <Compile Include="Client\ClientGameDll.cs" />
+    <Compile Include="Client\EntityManagerClient.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\EntityManagerServer.cs" />
+    <Compile Include="Server\GameServerManager.cs" />
+    <Compile Include="Server\ServerClass.cs" />
     <Compile Include="Server\ServerGameClients.cs" />
     <Compile Include="Server\ServerGameDll.cs" />
     <Compile Include="Server\ServerGameEnts.cs" />
