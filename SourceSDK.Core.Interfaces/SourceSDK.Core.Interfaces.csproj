@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6196C2A4-B79E-4AEF-BA81-E35201B6FBEE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SourceSDK.Core.Interfaces</RootNamespace>
+    <AssemblyName>SourceSDK.Core.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Client\BaseEntityClient.cs" />
+    <Compile Include="Client\IClientClass.cs" />
+    <Compile Include="Client\M_IClientEntity.cs" />
+    <Compile Include="Client\IClientGameDll.cs" />
+    <Compile Include="Client\IClientInitInterfaces.cs" />
+    <Compile Include="Client\M_IClientNetworkable.cs" />
+    <Compile Include="Client\M_IClientRenderable.cs" />
+    <Compile Include="Client\M_IClientThinkable.cs" />
+    <Compile Include="Client\IClientThinkHandle.cs" />
+    <Compile Include="Client\M_IClientUnknown.cs" />
+    <Compile Include="Client\IStandardRecvProxies.cs" />
+    <Compile Include="Client\M_RecvDecoder.cs" />
+    <Compile Include="Client\M_RecvProp.cs" />
+    <Compile Include="Client\M_ViewSetup.cs" />
+    <Compile Include="Client\NativeInterface\NI_EngineVgui.cs" />
+    <Compile Include="Client\NativeInterface\NI_GameEventManager.cs" />
+    <Compile Include="Client\NativeInterface\NI_GameUiFunctions.cs" />
+    <Compile Include="Client\NativeInterface\NI_InputSystem.cs" />
+    <Compile Include="Client\NativeInterface\NI_NetworkStringTable.cs" />
+    <Compile Include="Client\NativeInterface\NI_ShadowManager.cs" />
+    <Compile Include="Client\NativeInterface\NI_SoundEmitterBase.cs" />
+    <Compile Include="Client\NativeInterface\NI_StaticPropManager.cs" />
+    <Compile Include="Client\NativeInterface\NI_VDebugOverlay.cs" />
+    <Compile Include="Client\NativeInterface\NI_VEfx.cs" />
+    <Compile Include="Client\NativeInterface\NI_VEngineClient.cs" />
+    <Compile Include="Client\NativeInterface\NI_VModelInfoClient.cs" />
+    <Compile Include="Client\NativeInterface\NI_VModelRender.cs" />
+    <Compile Include="Client\NativeInterface\NI_VRenderView.cs" />
+    <Compile Include="Client\RecvPropertyAttribute.cs" />
+    <Compile Include="Mef.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\ICheckTransmitInfo.cs" />
+    <Compile Include="Server\IServerClasses.cs" />
+    <Compile Include="Server\IServerGameClients.cs" />
+    <Compile Include="Server\IServerGameDll.cs" />
+    <Compile Include="Server\IServerGameEnts.cs" />
+    <Compile Include="Server\IServerInitInterfaces.cs" />
+    <Compile Include="Shared\BaseHandle.cs" />
+    <Compile Include="Shared\IBaseEntity.cs" />
+    <Compile Include="Shared\M_ICollideable.cs" />
+    <Compile Include="Shared\IEdict.cs" />
+    <Compile Include="Shared\IEngineSprite.cs" />
+    <Compile Include="Shared\M_IHandleEntity.cs" />
+    <Compile Include="Shared\IPlayerState.cs" />
+    <Compile Include="Shared\M_ScreenFade.cs" />
+    <Compile Include="Shared\IStandardSendProxies.cs" />
+    <Compile Include="Shared\M_Vector.cs" />
+    <Compile Include="Shared\NativeInterface\NI_DataCache.cs" />
+    <Compile Include="Shared\NativeInterface\NI_EngineSound.cs" />
+    <Compile Include="Shared\NativeInterface\NI_EngineTrace.cs" />
+    <Compile Include="Shared\NativeInterface\NI_FileSystem.cs" />
+    <Compile Include="Server\NativeInterface\NI_GameEventManager2.cs" />
+    <Compile Include="Server\NativeInterface\NI_NetworkStringTableContainer.cs" />
+    <Compile Include="Shared\NativeInterface\NI_Random.cs" />
+    <Compile Include="Server\NativeInterface\NI_ScenceFileCache.cs" />
+    <Compile Include="Server\NativeInterface\NI_ServerPluginHelpers.cs" />
+    <Compile Include="Server\NativeInterface\NI_SoundEmitterSystemBase.cs" />
+    <Compile Include="Shared\NativeInterface\NI_SpatialPartition.cs" />
+    <Compile Include="Server\NativeInterface\NI_StaticPropManagerServer.cs" />
+    <Compile Include="Server\NativeInterface\NI_VEngineServer.cs" />
+    <Compile Include="Server\NativeInterface\NI_VoiceServer.cs" />
+    <Compile Include="Shared\IConCommand.cs" />
+    <Compile Include="Shared\NativeInterface\NI_ConsoleManager.cs" />
+    <Compile Include="Shared\IConVariable.cs" />
+    <Compile Include="Shared\M_QAngle.cs" />
+    <Compile Include="Shared\M_VRect.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "I:\Steam 2\steamapps\sourcemods\mymod\bin\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

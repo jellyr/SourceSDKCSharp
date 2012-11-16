@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\interfaces">
+      <UniqueIdentifier>{12868b6d-5ed8-443f-bcb0-a1a829b8388f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{b783cd2e-5891-475e-9498-ed515ca0c9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\wrappers">
+      <UniqueIdentifier>{3aec64dd-8f44-4dd7-bd25-8f94e7d2ee8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managed">
+      <UniqueIdentifier>{4c26bc3e-8d65-4d6d-a775-8687137fd3c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\valve">
+      <UniqueIdentifier>{8e902039-ca03-421f-83e0-651e75d0d1c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xboxstub.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="centerPrint.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="clientEntityList.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="prediction.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="clientLeafSystem.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="gameClientExports.h">
+      <Filter>Source Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VGui.h">
+      <Filter>Source Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="CVarWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInitInterfaces.h">
+      <Filter>Source Files\managed</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleManager.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConCommandWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientClassWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientUnknownWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientDll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="centerprint.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="client.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="clientEntityList.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Prediction.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="clientLeafSystem.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="gameClientExports.cpp">
+      <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="VGui.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="CVarWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\convar.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\strtools.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="MemAlloc.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="Extra.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlbuffer.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="win32.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="csharpResolver.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleManager.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConCommandWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientClassWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientUnknownWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\newbitbuf.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\bitbuf.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_recv.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_utlvector_common.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_utlvector_recv.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
