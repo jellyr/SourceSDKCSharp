@@ -4,4 +4,4 @@
 
 #pragma once
 
-
+#define _VARIADIC_MAX 6

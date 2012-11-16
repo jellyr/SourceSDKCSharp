@@ -17,6 +17,9 @@ public:
 		return m_ClientClass;
 	}
 
+protected:
+	RecvTable* CreateRecvTable();
+
 private:
 	std::vector<std::string> m_vPropNames;
 	std::vector<std::function<void (const CRecvProxyData *, void*, void*)>> m_vFunctions;

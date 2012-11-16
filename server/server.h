@@ -5,6 +5,8 @@
 typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
 #include "eiface.h"
 
+#include <gcroot.h>
+
 //IPlayerInfoManager
 //IBotManager
 //IEffects
@@ -111,4 +113,10 @@ public:
 	// iCookie is the value returned by IServerPluginHelpers::StartQueryCvarValue.
 	// Added with version 2 of the interface.
 	void OnQueryCvarValueFinished(QueryCvarCookie_t iCookie, edict_t *pPlayerEntity, EQueryCvarValueStatus eStatus, const char *pCvarName, const char *pCvarValue) override;
+
+
+	gcroot<SourceSDK::Core::Interfaces::Server::IServerInitInterfaces^> ServerInterfaces;
+
+private:
+	std::string m_szGameDesc;
 };

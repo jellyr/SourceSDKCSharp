@@ -51,7 +51,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;STATIC_TIER0;STATIC_TIER1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>..\global_sdk;..\shared</AdditionalIncludeDirectories>
     </ClCompile>
@@ -85,14 +85,22 @@
     <ClInclude Include="..\shared\ConCommandWrapper.h" />
     <ClInclude Include="..\shared\ConsoleManager.h" />
     <ClInclude Include="..\shared\CVarWrapper.h" />
+    <ClInclude Include="EdictWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server.h" />
+    <ClInclude Include="ServerClassWrapper.h" />
     <ClInclude Include="serverGameClients.h" />
     <ClInclude Include="serverGameEnts.h" />
     <ClInclude Include="ServerInitInterfaces.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\global_sdk\dt_send.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_utlvector_common.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\bitbuf.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -123,6 +131,7 @@
     </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="ServerClassWrapper.cpp" />
     <ClCompile Include="ServerDll.cpp" />
     <ClCompile Include="serverGameClients.cpp" />
     <ClCompile Include="serverGameEnts.cpp" />

@@ -1,7 +1,6 @@
 #include "Stdafx.h"
 
 typedef char tchar;
-#define DBG_INTERFACE extern "C" __declspec( dllexport )
 
 
 /* Various types of spew messages */
@@ -26,27 +25,27 @@ enum SpewRetval_t
 	SPEW_ABORT
 };
 
-DBG_INTERFACE void _SpewInfo(SpewType_t type, const tchar* pFile, int line)
+void _SpewInfo(SpewType_t type, const tchar* pFile, int line)
 {
 
 }
 
-DBG_INTERFACE SpewRetval_t _SpewMessage(const tchar* pMsg, ...)
+SpewRetval_t _SpewMessage(const tchar* pMsg, ...)
 {
 	return SPEW_ABORT;
 }
 
-DBG_INTERFACE bool ShouldUseNewAssertDialog()
+bool ShouldUseNewAssertDialog()
 {
 	return true;
 }
 
-DBG_INTERFACE bool DoNewAssertDialog(const tchar *pFile, int line, const tchar *pExpression)
+bool DoNewAssertDialog(const tchar *pFile, int line, const tchar *pExpression)
 {
 	return true;
 }
 
-DBG_INTERFACE void _ExitOnFatalAssert(const tchar* pFile, int line)
+void _ExitOnFatalAssert(const tchar* pFile, int line)
 {
 
 }

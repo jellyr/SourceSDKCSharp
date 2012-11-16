@@ -73,11 +73,12 @@
     <Compile Include="Mef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ICheckTransmitInfo.cs" />
-    <Compile Include="Server\IServerClasses.cs" />
+    <Compile Include="Server\IServerClass.cs" />
     <Compile Include="Server\M_IServerGameClients.cs" />
     <Compile Include="Server\M_IServerGameDll.cs" />
     <Compile Include="Server\M_IServerGameEnts.cs" />
     <Compile Include="Server\IServerInitInterfaces.cs" />
+    <Compile Include="Server\M_SendProp.cs" />
     <Compile Include="Shared\BaseHandle.cs" />
     <Compile Include="Shared\IBaseEntity.cs" />
     <Compile Include="Shared\IGameInfo.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Shared\IEngineSprite.cs" />
     <Compile Include="Shared\M_IHandleEntity.cs" />
     <Compile Include="Shared\IPlayerState.cs" />
+    <Compile Include="Shared\M_PropType.cs" />
     <Compile Include="Shared\M_ScreenFade.cs" />
     <Compile Include="Shared\IStandardSendProxies.cs" />
     <Compile Include="Shared\M_Vector.cs" />

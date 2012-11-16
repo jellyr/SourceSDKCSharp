@@ -148,12 +148,12 @@ ClientClass* CSourceSDKClient::GetAllClasses()
 	if (g_pClientClassHead)
 		return g_pClientClassHead;
 
-	auto ret = ClientInterfaces->ClientGameDll->GetAllClasses();
+	auto classes = ClientInterfaces->ClientGameDll->GetAllClasses();
 
-	if (ret == nullptr)
+	if (classes == nullptr)
 		return nullptr;
 
-	for each (auto i in ret)
+	for each (auto i in classes)
 		new CClientClassWrapper(i);
 
 	return g_pClientClassHead;

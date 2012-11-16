@@ -140,12 +140,18 @@ public:
 
 RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::string> &propNames, std::vector<std::function<void (const CRecvProxyData *, void*, void*)>> &vFunctions);
 
+static void DoAssert()
+{
+	Assert(false);
+}
+
+
 CClientClassWrapper::CClientClassWrapper(IClientClass^ clientClass) 
 	: ClientClass(nullptr, nullptr, nullptr, nullptr)
 {
 	m_ClientClass = clientClass;
 
-	m_pRecvTable = CreateRecvTable(clientClass, m_vPropNames, m_vFunctions);
+	m_pRecvTable = CreateRecvTable();
 	m_szNetworkName = marshal_as<std::string>(clientClass->Name);
 	m_pNetworkName = (char*)m_szNetworkName.c_str();
 
@@ -169,15 +175,10 @@ CClientClassWrapper::CClientClassWrapper(IClientClass^ clientClass)
 	}
 }
 
-static void DoAssert()
-{
-	Assert(false);
-}
-
-static RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::string> &propNames, std::vector<std::function<void (const CRecvProxyData *, void*, void*)>> &vFunctions)
+RecvTable* CClientClassWrapper::CreateRecvTable()
 {
 	auto pRt = new RecvTable();
-	pRt->m_nProps = clientClass->RecvProps->Length;
+	pRt->m_nProps = m_ClientClass->RecvProps->Length;
 
 	if (pRt->m_nProps == 0)
 		return pRt;
@@ -186,11 +187,11 @@ static RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::st
 
 	int x=0;
 
-	for each (auto i in clientClass->RecvProps)
+	for each (auto i in m_ClientClass->RecvProps)
 	{
 		auto pw = CRecvPropWrapper(i);
 		std::string szName = marshal_as<std::string>(i->Name);
-		propNames.push_back(szName);
+		m_vPropNames.push_back(szName);
 
 		switch (i->Type)
 		{
@@ -201,8 +202,8 @@ static RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::st
 					pw.Get()->SetValue(o, pData->m_Value.m_Int);
 				};
 
-				vFunctions.push_back(funct);
-				props[x] = RecvPropInt((char*)propNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, vFunctions[x].target<RecvVarProxyFnNoPtr>());
+				m_vFunctions.push_back(funct);
+				props[x] = RecvPropInt((char*)m_vPropNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, m_vFunctions[x].target<RecvVarProxyFnNoPtr>());
 			}
 			break;
 
@@ -213,8 +214,8 @@ static RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::st
 					pw.Get()->SetValue(o, pData->m_Value.m_Float);
 				};
 
-				vFunctions.push_back(funct);
-				props[x] = RecvPropFloat((char*)propNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, vFunctions[x].target<RecvVarProxyFnNoPtr>());
+				m_vFunctions.push_back(funct);
+				props[x] = RecvPropFloat((char*)m_vPropNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, m_vFunctions[x].target<RecvVarProxyFnNoPtr>());
 			}
 			break;
 
@@ -225,8 +226,8 @@ static RecvTable* CreateRecvTable(IClientClass^ clientClass, std::vector<std::st
 					pw.Get()->SetValue(o, gcnew String(pData->m_Value.m_pString));
 				};
 
-				vFunctions.push_back(funct);
-				props[x] = RecvPropString((char*)propNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, vFunctions[x].target<RecvVarProxyFnNoPtr>());
+				m_vFunctions.push_back(funct);
+				props[x] = RecvPropString((char*)m_vPropNames[x].c_str(), 0, SIZEOF_IGNORE, i->Flags, m_vFunctions[x].target<RecvVarProxyFnNoPtr>());
 			}
 			break;
 

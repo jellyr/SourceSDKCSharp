@@ -11,11 +11,11 @@ namespace SourceSDK.Core.Interfaces.Server
     {
         bool GameInit();
 
-        bool levelInit(String mapName, String mapEntites, String oldLevel, String landmarkName, bool loadGame, bool background);
+        bool LevelInit(String mapName, String mapEntites, String oldLevel, String landmarkName, bool loadGame, bool background);
 
         void ServerActivate(IEdict[] edictList, int clientMax);
 
-        void GameGrame(bool simulating);
+        void GameFrame(bool simulating);
 
         void PreClientUpdate(bool simulating);
 
@@ -27,7 +27,7 @@ namespace SourceSDK.Core.Interfaces.Server
 
         float GetTickInterval();
 
-        IServerClasses[] GetAllServerClasses();
+        IServerClass[] GetAllServerClasses();
 
         String GetGameDescription();
 

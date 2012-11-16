@@ -17,7 +17,7 @@ namespace SourceSDK.Core.Server
             return true;
         }
 
-        public bool levelInit(string mapName, string mapEntites, string oldLevel, string landmarkName, bool loadGame, bool background)
+        public bool LevelInit(string mapName, string mapEntites, string oldLevel, string landmarkName, bool loadGame, bool background)
         {
             return true;
         }
@@ -27,7 +27,7 @@ namespace SourceSDK.Core.Server
             
         }
 
-        public void GameGrame(bool simulating)
+        public void GameFrame(bool simulating)
         {
             
         }
@@ -57,7 +57,7 @@ namespace SourceSDK.Core.Server
             return 0.015f;
         }
 
-        public IServerClasses[] GetAllServerClasses()
+        public IServerClass[] GetAllServerClasses()
         {
             return null;
         }

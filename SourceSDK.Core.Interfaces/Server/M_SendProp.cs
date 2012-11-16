@@ -6,46 +6,53 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace SourceSDK.Core.Interfaces.Client
+namespace SourceSDK.Core.Interfaces.Server
 {
-    public class M_RecvProp
+
+    public class M_SendProp
     {
         public String Name { get; set; }
         public PropType Type { get; set; }
         public int Flags { get; set; }
         public PropertyInfo Property { get; set; }
 
-        public void SetValue(Object o, int val)
+        public float FloatMin { get; set; }
+        public float FloatMax { get; set; }
+
+        public int FieldLength { get; set; }
+
+        public int GetInt(Object o)
         {
             if (Type != PropType.DPT_Int)
             {
                 Debug.Assert(false);
-                return;
+                return 0;
             }
 
-            Property.SetValue(0, val);
+            return (int)Property.GetValue(o);
         }
 
-        public void SetValue(Object o, float val)
+        public float GetFloat(Object o)
         {
             if (Type != PropType.DPT_Float)
             {
                 Debug.Assert(false);
-                return;
+                return 0.0f;
             }
 
-            Property.SetValue(0, val);
+            return (float)Property.GetValue(o);
         }
 
-        public void SetValue(Object o, String val)
+        public String GetString(Object o)
         {
             if (Type != PropType.DPT_String)
             {
                 Debug.Assert(false);
-                return;
+                return "";
             }
 
-            Property.SetValue(0, val);
+            return (String)Property.GetValue(o);
         }
+
     }
 }

@@ -57,6 +57,12 @@
     <ClInclude Include="ServerInitInterfaces.h">
       <Filter>Source Files\managed</Filter>
     </ClInclude>
+    <ClInclude Include="EdictWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerClassWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -117,6 +123,15 @@
       <Filter>Source Files\valve</Filter>
     </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerClassWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_send.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\dt_utlvector_common.cpp">
       <Filter>Source Files\valve</Filter>
     </ClCompile>
   </ItemGroup>
