@@ -13,44 +13,62 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core
 {
+    internal class GameInfo : IGameInfo
+    {
+        internal GameInfo(bool isServer)
+        {
+            IsServer = isServer;
+            IsClient = !isServer;
+        }
+
+        public bool IsServer { get; protected set; }
+        public bool IsClient { get; protected set; }
+    }
+
     public class Entry
     {
         public static void ClientInit(IClientInitInterfaces initInterfaces)
         {
-            Mef.Init(false, Assembly.GetExecutingAssembly());
+            MefClient.Init(Assembly.GetExecutingAssembly());
+            MefClient.AddType<IGameInfo>(new GameInfo(false));
 
-            LoadMefTypes<IClientInitInterfaces>(initInterfaces);
-            LoadCVars();
+            LoadMefTypes<IClientInitInterfaces>(initInterfaces, typeof(MefClient));
 
-            initInterfaces.ClientGameDll = Mef.GetExportedValue<IClientGameDll>();
+            var consoleManager = MefClient.GetExportedValue<NI_ConsoleManager>();
+
+            foreach (var conCommand in MefClient.GetExportedValues<IConCommand>())
+                consoleManager.Register(conCommand);
+
+            foreach (var conVar in MefClient.GetExportedValues<IConVariable>())
+                consoleManager.Register(conVar);
+
+            initInterfaces.ClientGameDll = MefClient.GetExportedValue<M_IClientGameDll>();
         }
 
         public static void ServerInit(IServerInitInterfaces initInterfaces)
         {
-            Mef.Init(true, Assembly.GetExecutingAssembly());
+            MefServer.Init(Assembly.GetExecutingAssembly());
+            MefServer.AddType<IGameInfo>(new GameInfo(true));
 
-            LoadMefTypes<IServerInitInterfaces>(initInterfaces);
-            LoadCVars();
+            LoadMefTypes<IServerInitInterfaces>(initInterfaces, typeof(MefServer));
 
-            initInterfaces.ServerGameDll = Mef.GetExportedValue<IServerGameDll>();
-            initInterfaces.ServerGameClients = Mef.GetExportedValue<IServerGameClients>();
-            initInterfaces.ServerGameEnts = Mef.GetExportedValue<IServerGameEnts>();
-        }
+            var consoleManager = MefServer.GetExportedValue<NI_ConsoleManager>();
 
-        private static void LoadCVars()
-        {
-            var consoleManager = Mef.GetExportedValue<NI_ConsoleManager>();
-
-            foreach (var conCommand in Mef.GetExportedValues<IConCommand>())
+            foreach (var conCommand in MefServer.GetExportedValues<IConCommand>())
                 consoleManager.Register(conCommand);
 
-            foreach (var conVar in Mef.GetExportedValues<IConVariable>())
+            foreach (var conVar in MefServer.GetExportedValues<IConVariable>())
                 consoleManager.Register(conVar);
+
+
+            initInterfaces.ServerGameDll = MefServer.GetExportedValue<M_IServerGameDll>();
+            initInterfaces.ServerGameClients = MefServer.GetExportedValue<M_IServerGameClients>();
+            initInterfaces.ServerGameEnts = MefServer.GetExportedValue<M_IServerGameEnts>();
         }
 
-        private static void LoadMefTypes<T>(T initInterfaces)
+        private static void LoadMefTypes<T>(T initInterfaces, Type mefType)
         {
-            var addType = typeof(Mef).GetMethod("AddType");
+            var addType = mefType.GetMethod("AddType");
 
             var it = initInterfaces.GetType();
             foreach (var p in it.GetProperties())

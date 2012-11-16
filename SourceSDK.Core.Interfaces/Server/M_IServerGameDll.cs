@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Interfaces.Server
 {
-    public interface IServerGameDll
+    public interface M_IServerGameDll
     {
         bool GameInit();
 

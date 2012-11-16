@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\global_sdk</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\global_sdk;..\shared</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -78,19 +78,50 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\ConCommandWrapper.h" />
+    <ClInclude Include="..\shared\ConsoleManager.h" />
+    <ClInclude Include="..\shared\CVarWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="serverGameClients.h" />
     <ClInclude Include="serverGameEnts.h" />
+    <ClInclude Include="ServerInitInterfaces.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\global_sdk\tier1\bitbuf.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\convar.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\newbitbuf.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\strtools.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlbuffer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\shared\ConCommandWrapper.cpp" />
+    <ClCompile Include="..\shared\ConsoleManager.cpp" />
+    <ClCompile Include="..\shared\csharpResolver.cpp" />
+    <ClCompile Include="..\shared\CVarWrapper.cpp" />
+    <ClCompile Include="..\shared\Debug.cpp" />
+    <ClCompile Include="..\shared\Extra.cpp" />
+    <ClCompile Include="..\shared\MemAlloc.cpp" />
+    <ClCompile Include="..\shared\win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="debug.cpp" />
-    <ClCompile Include="MemAlloc.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="ServerDll.cpp" />
     <ClCompile Include="serverGameClients.cpp" />

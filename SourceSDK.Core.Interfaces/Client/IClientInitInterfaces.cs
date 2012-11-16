@@ -31,6 +31,6 @@ namespace SourceSDK.Core.Interfaces.Client
         NI_SoundEmitterBase SoundSmitterBase { get; }
         NI_InputSystem InputSystem { get; }
 
-        IClientGameDll ClientGameDll { get; set; }
+        M_IClientGameDll ClientGameDll { get; set; }
     }
 }

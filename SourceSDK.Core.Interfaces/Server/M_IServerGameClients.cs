@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Interfaces.Server
 {
-    public interface IServerGameClients
+    public interface M_IServerGameClients
     {
 	    void GetPlayerLimits(ref int minplayers, ref int maxplayers, ref int defaultMaxPlayers);
 	    bool ClientConnect(IEdict pEntity, String name, String address, ref String reject);

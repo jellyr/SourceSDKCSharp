@@ -25,8 +25,8 @@ namespace SourceSDK.Core.Interfaces.Server
         NI_ServerPluginHelpers ServerPluginHelpers { get; }
         NI_ScenceFileCache SceneFileCache { get; }
 
-        IServerGameDll ServerGameDll { get; set; }
-        IServerGameClients ServerGameClients { get; set; }
-        IServerGameEnts ServerGameEnts { get; set; }
+        M_IServerGameDll ServerGameDll { get; set; }
+        M_IServerGameClients ServerGameClients { get; set; }
+        M_IServerGameEnts ServerGameEnts { get; set; }
     }
 }

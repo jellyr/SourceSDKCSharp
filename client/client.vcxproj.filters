@@ -63,22 +63,22 @@
     <ClInclude Include="VGui.h">
       <Filter>Source Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="CVarWrapper.h">
-      <Filter>Source Files\wrappers</Filter>
-    </ClInclude>
     <ClInclude Include="ClientInitInterfaces.h">
       <Filter>Source Files\managed</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleManager.h">
-      <Filter>Source Files\wrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConCommandWrapper.h">
-      <Filter>Source Files\wrappers</Filter>
     </ClInclude>
     <ClInclude Include="ClientClassWrapper.h">
       <Filter>Source Files\wrappers</Filter>
     </ClInclude>
     <ClInclude Include="ClientUnknownWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\ConCommandWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\ConsoleManager.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\CVarWrapper.h">
       <Filter>Source Files\wrappers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -87,9 +87,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClientDll.cpp">
@@ -116,38 +113,17 @@
     <ClCompile Include="VGui.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="CVarWrapper.cpp">
-      <Filter>Source Files\wrappers</Filter>
-    </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\convar.cpp">
       <Filter>Source Files\valve</Filter>
     </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\strtools.cpp">
       <Filter>Source Files\valve</Filter>
     </ClCompile>
-    <ClCompile Include="MemAlloc.cpp">
-      <Filter>Source Files\valve</Filter>
-    </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
-      <Filter>Source Files\valve</Filter>
-    </ClCompile>
-    <ClCompile Include="Extra.cpp">
       <Filter>Source Files\valve</Filter>
     </ClCompile>
     <ClCompile Include="..\global_sdk\tier1\utlbuffer.cpp">
       <Filter>Source Files\valve</Filter>
-    </ClCompile>
-    <ClCompile Include="win32.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="csharpResolver.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleManager.cpp">
-      <Filter>Source Files\wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="ConCommandWrapper.cpp">
-      <Filter>Source Files\wrappers</Filter>
     </ClCompile>
     <ClCompile Include="ClientClassWrapper.cpp">
       <Filter>Source Files\wrappers</Filter>
@@ -169,6 +145,30 @@
     </ClCompile>
     <ClCompile Include="..\global_sdk\dt_utlvector_recv.cpp">
       <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\ConCommandWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\ConsoleManager.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\CVarWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\csharpResolver.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\win32.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Debug.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Extra.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\MemAlloc.cpp">
+      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

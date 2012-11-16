@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Interfaces.Server
 {
-    public interface IServerGameEnts
+    public interface M_IServerGameEnts
     {
 	    void SetDebugEdictBase(IEdict edict);
 	    void MarkEntitiesAsTouching(IEdict e1, IEdict e2);

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Server
 {
-    [Export(typeof(IServerGameClients))]
-    class ServerGameClients : IServerGameClients
+    [Export(typeof(M_IServerGameClients))]
+    class ServerGameClients : M_IServerGameClients
     {
         public void GetPlayerLimits(ref int minplayers, ref int maxplayers, ref int defaultMaxPlayers)
         {

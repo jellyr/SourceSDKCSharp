@@ -159,10 +159,12 @@ void ConsoleManager::Write(System::Drawing::Color color, String^ line)
 	std::string szLine = marshal_as<std::string>(line);
 
 	int col = color.ToArgb();
-	col = (col << 8) + ((col >> 24)&0xFF); //argb to rgba
 
 	Color c;
-	c.SetRawColor(col);
+	c[3] = ((col >> 24)&0xFF);
+	c[0] = ((col >> 16)&0xFF);
+	c[1] = ((col >> 8)&0xFF);
+	c[2] = ((col >> 0)&0xFF);
 
 	m_pCvar->ConsoleColorPrintf(c, "%s", szLine.c_str());
 }
@@ -178,10 +180,12 @@ void ConsoleManager::WriteLine(System::Drawing::Color color, String^ line)
 	std::string szLine = marshal_as<std::string>(line);
 
 	int col = color.ToArgb();
-	col = (col << 8) + ((col >> 24)&0xFF); //argb to rgba
 
 	Color c;
-	c.SetRawColor(col);
+	c[3] = ((col >> 24)&0xFF);
+	c[0] = ((col >> 16)&0xFF);
+	c[1] = ((col >> 8)&0xFF);
+	c[2] = ((col >> 0)&0xFF);
 
 	m_pCvar->ConsoleColorPrintf(c, "%s\n", szLine.c_str());
 }

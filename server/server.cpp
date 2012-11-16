@@ -3,6 +3,11 @@
 #include "server.h"
 #include <string>
 
+#include <string>
+#include "icvar.h"
+#include "ConsoleManager.h"
+#include "ServerInitInterfaces.h"
+
 using namespace System;
 using namespace System::Reflection;
 
@@ -10,26 +15,25 @@ std::string GetModulePath();
 
 bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfaceFn physicsFactory, CreateInterfaceFn fileSystemFactory, CGlobalVars *pGlobals)
 {
+	ICvar * pCvar = (ICvar*)appSystemFactory(CVAR_INTERFACE_VERSION, NULL);
 
-	//ICvar * pCvar = (ICvar*)appSystemFactory(CVAR_INTERFACE_VERSION, NULL);
+	if (!pCvar)
+		return false;
 
-	//if (!pCvar)
-	//	return false;
-
-	//ServerInitInterfaces^ cii = gcnew ServerInitInterfaces();
-	//cii->ConsoleManager = gcnew ConsoleManager(pCvar);
-
+	ServerInitInterfaces^ sii = gcnew ServerInitInterfaces();
+	sii->ConsoleManager = gcnew SourceSDK::ConsoleManager(pCvar);
 
 
-	//auto workingDir = gcnew String(GetModulePath().c_str());
 
-	//auto assembly = Assembly::LoadFile(workingDir + "SourceSDK.Core.dll");
-	//auto type = assembly->GetType("SourceSDK.Core.Entry");
+	auto workingDir = gcnew String(GetModulePath().c_str());
 
-	//auto args = gcnew cli::array<Object^, 1>(1);
-	//args[0] = cii;
+	auto assembly = Assembly::LoadFile(workingDir + "SourceSDK.Core.dll");
+	auto type = assembly->GetType("SourceSDK.Core.Entry");
 
-	//type->InvokeMember(gcnew String("ServerInit"), BindingFlags::Public|BindingFlags::Static|BindingFlags::InvokeMethod, nullptr, nullptr, args);
+	auto args = gcnew cli::array<Object^, 1>(1);
+	args[0] = sii;
+
+	type->InvokeMember(gcnew String("ServerInit"), BindingFlags::Public|BindingFlags::Static|BindingFlags::InvokeMethod, nullptr, nullptr, args);
 
 
 

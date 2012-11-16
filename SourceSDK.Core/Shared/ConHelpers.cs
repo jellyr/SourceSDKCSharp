@@ -13,6 +13,16 @@ namespace SourceSDK.Core.Shared
     [Export(typeof(IConCommand))]
     public class CmdListConCommand : BaseConCommand
     {
+        NI_ConsoleManager _Manager;
+        IGameInfo _GameInfo;
+
+        [ImportingConstructor]
+        public CmdListConCommand(NI_ConsoleManager manager, IGameInfo gameInfo)
+        {
+            _Manager = manager;
+            _GameInfo = gameInfo;
+        }
+
         public override string Name
         {
             get { return "cmdlist"; }
@@ -34,8 +44,12 @@ namespace SourceSDK.Core.Shared
 
         public override void Execute(string[] args)
         {
-            var cm = Mef.GetExportedValue<NI_ConsoleManager>();
-            var list = cm.GetConCommands();
+            if (_GameInfo.IsClient)
+                _Manager.WriteLine(Color.Blue, "cmdlist - client");
+            else
+                _Manager.WriteLine(Color.Blue, "cmdlist - server");
+
+            var list = _Manager.GetConCommands();
 
             list.Sort((a, b) => a.Name.CompareTo(b.Name));
 
@@ -48,12 +62,12 @@ namespace SourceSDK.Core.Shared
                 if (h.Length > 64)
                     h = h.Substring(0, 64) + "...";
 
-                cm.Write("\t" + c.Name);
+                _Manager.Write("\t" + c.Name);
 
                 if (String.IsNullOrEmpty(h))
-                    cm.WriteLine("");
+                    _Manager.WriteLine("");
                 else
-                    cm.WriteLine(Color.DarkRed, String.Format(" - {0}", h));
+                    _Manager.WriteLine(Color.DarkRed, String.Format(" - {0}", h));
             }
         }
     }
@@ -61,6 +75,16 @@ namespace SourceSDK.Core.Shared
     [Export(typeof(IConCommand))]
     public class CVarListConCommand : BaseConCommand
     {
+        NI_ConsoleManager _Manager;
+        IGameInfo _GameInfo;
+
+        [ImportingConstructor]
+        public CVarListConCommand(NI_ConsoleManager manager, IGameInfo gameInfo)
+        {
+            _Manager = manager;
+            _GameInfo = gameInfo;
+        }
+
         public override string Name
         {
             get { return "cvarlist"; }
@@ -82,8 +106,12 @@ namespace SourceSDK.Core.Shared
 
         public override void Execute(string[] args)
         {
-            var cm = Mef.GetExportedValue<NI_ConsoleManager>();
-            var list = cm.GetConVariables();
+            if (_GameInfo.IsClient)
+                _Manager.WriteLine(Color.Blue, "cvarlist - client");
+            else
+                _Manager.WriteLine(Color.Blue, "cvarlist - server");
+
+            var list = _Manager.GetConVariables();
 
             list.Sort((a, b) => a.Name.CompareTo(b.Name));
 
@@ -96,12 +124,12 @@ namespace SourceSDK.Core.Shared
                 if (h.Length > 64)
                     h = h.Substring(0, 64) + "...";
 
-                cm.Write(String.Format("\t{0} ({1})", c.Name, c.Value));
+                _Manager.Write(String.Format("\t{0} ({1})", c.Name, c.Value));
 
                 if (String.IsNullOrEmpty(h))
-                    cm.WriteLine("");
+                    _Manager.WriteLine("");
                 else
-                    cm.WriteLine(Color.DarkRed, String.Format(" - {0}", h));
+                    _Manager.WriteLine(Color.DarkRed, String.Format(" - {0}", h));
             }
         }
     }

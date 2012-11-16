@@ -19,6 +19,15 @@
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{8d7d0858-ac63-4ba4-b58d-2caa9c9644fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\wrappers">
+      <UniqueIdentifier>{3ebaa74f-48da-48fb-b86f-1c7093a2f1b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managed">
+      <UniqueIdentifier>{31e0f9c0-835c-4e4c-b8da-7d816556407a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\valve">
+      <UniqueIdentifier>{1de247eb-75b8-4d4e-b063-4008cde61116}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -36,18 +45,24 @@
     <ClInclude Include="serverGameClients.h">
       <Filter>Source Files\interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="..\shared\ConCommandWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\ConsoleManager.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\CVarWrapper.h">
+      <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerInitInterfaces.h">
+      <Filter>Source Files\managed</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MemAlloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="server.cpp">
@@ -61,6 +76,48 @@
     </ClCompile>
     <ClCompile Include="serverGameClients.cpp">
       <Filter>Source Files\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\csharpResolver.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\win32.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\ConCommandWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\ConsoleManager.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\CVarWrapper.cpp">
+      <Filter>Source Files\wrappers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Debug.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\Extra.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\MemAlloc.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\convar.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\bitbuf.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\newbitbuf.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\strtools.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlbuffer.cpp">
+      <Filter>Source Files\valve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
+      <Filter>Source Files\valve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

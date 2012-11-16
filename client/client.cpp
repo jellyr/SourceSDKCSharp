@@ -25,7 +25,7 @@ int CSourceSDKClient::Init(CreateInterfaceFn appSystemFactory, CreateInterfaceFn
 		return false;
 
 	auto cii = gcnew ClientInitInterfaces();
-	cii->ConsoleManager = gcnew ConsoleManager(pCvar);
+	cii->ConsoleManager = gcnew SourceSDK::ConsoleManager(pCvar);
 
 
 	ClientInterfaces = cii;

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Server
 {
-    [Export(typeof(IServerGameEnts))]
-    class ServerGameEnts : IServerGameEnts
+    [Export(typeof(M_IServerGameEnts))]
+    class ServerGameEnts : M_IServerGameEnts
     {
         public void SetDebugEdictBase(IEdict edict)
         {

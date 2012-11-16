@@ -1,7 +1,5 @@
 #pragma once
 
-#include "CVarWrapper.h"
-
 using namespace SourceSDK::Core::Interfaces::Client;
 using namespace SourceSDK::Core::Interfaces::Shared;
 
@@ -30,5 +28,5 @@ public:
 	virtual property NI_SoundEmitterBase^ SoundSmitterBase;
 	virtual property NI_InputSystem^ InputSystem;
 
-	virtual property IClientGameDll^ ClientGameDll;
+	virtual property M_IClientGameDll^ ClientGameDll;
 };

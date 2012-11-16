@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Client
 {
-    [Export(typeof(IClientGameDll))]
-    class ClientGameDll : IClientGameDll
+    [Export(typeof(M_IClientGameDll))]
+    class ClientGameDll : M_IClientGameDll
     {
         public void PostInit()
         {

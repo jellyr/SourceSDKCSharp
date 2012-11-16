@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <AdditionalIncludeDirectories>..\global_sdk</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\global_sdk;..\shared</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -85,6 +85,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\shared\ConCommandWrapper.h" />
+    <ClInclude Include="..\shared\ConsoleManager.h" />
+    <ClInclude Include="..\shared\CVarWrapper.h" />
     <ClInclude Include="centerPrint.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="ClientClassWrapper.h" />
@@ -92,9 +95,6 @@
     <ClInclude Include="ClientInitInterfaces.h" />
     <ClInclude Include="clientLeafSystem.h" />
     <ClInclude Include="ClientUnknownWrapper.h" />
-    <ClInclude Include="ConCommandWrapper.h" />
-    <ClInclude Include="ConsoleManager.h" />
-    <ClInclude Include="CVarWrapper.h" />
     <ClInclude Include="EngineSprite.h" />
     <ClInclude Include="gameClientExports.h" />
     <ClInclude Include="prediction.h" />
@@ -133,6 +133,16 @@
     <ClCompile Include="..\global_sdk\tier1\utlstring.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\shared\ConCommandWrapper.cpp" />
+    <ClCompile Include="..\shared\ConsoleManager.cpp" />
+    <ClCompile Include="..\shared\csharpResolver.cpp" />
+    <ClCompile Include="..\shared\CVarWrapper.cpp" />
+    <ClCompile Include="..\shared\Debug.cpp" />
+    <ClCompile Include="..\shared\Extra.cpp" />
+    <ClCompile Include="..\shared\MemAlloc.cpp" />
+    <ClCompile Include="..\shared\win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="centerprint.cpp" />
     <ClCompile Include="client.cpp" />
@@ -141,14 +151,7 @@
     <ClCompile Include="clientEntityList.cpp" />
     <ClCompile Include="clientLeafSystem.cpp" />
     <ClCompile Include="ClientUnknownWrapper.cpp" />
-    <ClCompile Include="ConCommandWrapper.cpp" />
-    <ClCompile Include="ConsoleManager.cpp" />
-    <ClCompile Include="csharpResolver.cpp" />
-    <ClCompile Include="CVarWrapper.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Extra.cpp" />
     <ClCompile Include="gameClientExports.cpp" />
-    <ClCompile Include="MemAlloc.cpp" />
     <ClCompile Include="Prediction.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -156,9 +159,6 @@
     </ClCompile>
     <ClCompile Include="VGui.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="win32.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

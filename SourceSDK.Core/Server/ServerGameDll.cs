@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace SourceSDK.Core.Server
 {
-    [Export(typeof(IServerGameDll))]
-    class ServerGameDll : IServerGameDll
+    [Export(typeof(M_IServerGameDll))]
+    class ServerGameDll : M_IServerGameDll
     {
         public bool GameInit()
         {

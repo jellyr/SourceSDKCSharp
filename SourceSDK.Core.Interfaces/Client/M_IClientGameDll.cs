@@ -29,7 +29,7 @@ namespace SourceSDK.Core.Interfaces.Client
 	    FRAME_RENDER_END
     }
 
-    public interface IClientGameDll
+    public interface M_IClientGameDll
     {
         void PostInit();
         void Shutdown();
