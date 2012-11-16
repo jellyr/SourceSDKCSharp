@@ -17,7 +17,7 @@ namespace SourceSDK.Core
     {
         public static void ClientInit(IClientInitInterfaces initInterfaces)
         {
-            Mef.Init(false);
+            Mef.Init(false, Assembly.GetExecutingAssembly());
 
             LoadMefTypes<IClientInitInterfaces>(initInterfaces);
             LoadCVars();
@@ -27,7 +27,7 @@ namespace SourceSDK.Core
 
         public static void ServerInit(IServerInitInterfaces initInterfaces)
         {
-            Mef.Init(true);
+            Mef.Init(true, Assembly.GetExecutingAssembly());
 
             LoadMefTypes<IServerInitInterfaces>(initInterfaces);
             LoadCVars();

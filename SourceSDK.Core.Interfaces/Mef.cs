@@ -26,7 +26,7 @@ namespace SourceSDK.Core.Interfaces
             return _Container.GetExportedValues<T>();
         }
 
-        public static void Init(bool isServer)
+        public static void Init(bool isServer, Assembly entryAssembly)
         {
             if (_Container != null)
                 return;
@@ -38,7 +38,7 @@ namespace SourceSDK.Core.Interfaces
 
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            var catalog = new AggregateCatalog(new DirectoryCatalog(path, search), new AssemblyCatalog(Assembly.GetEntryAssembly()));
+            var catalog = new AggregateCatalog(new DirectoryCatalog(path, search), new AssemblyCatalog(entryAssembly));
             _Container = new CompositionContainer(catalog);
         }
 

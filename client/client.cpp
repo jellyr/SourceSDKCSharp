@@ -150,6 +150,9 @@ ClientClass* CSourceSDKClient::GetAllClasses()
 
 	auto ret = ClientInterfaces->ClientGameDll->GetAllClasses();
 
+	if (ret == nullptr)
+		return nullptr;
+
 	for each (auto i in ret)
 		new CClientClassWrapper(i);
 
@@ -201,7 +204,8 @@ void CSourceSDKClient::IN_Accumulate()
 
 void CSourceSDKClient::IN_ClearStates()
 {
-	ClientInterfaces->ClientGameDll->OnClearStates();
+	if (ClientInterfaces)
+		ClientInterfaces->ClientGameDll->OnClearStates();
 }
 
 bool CSourceSDKClient::IN_IsKeyDown(const char *name, bool& isdown)
