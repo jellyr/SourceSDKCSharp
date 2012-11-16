@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Core\BasePlayer.cs" />
     <Compile Include="Core\PointEntity.cs" />
     <Compile Include="Core\WorldEntity.cs" />
     <Compile Include="Info\PlayerStartEntity.cs" />

@@ -1,6 +1,9 @@
 #pragma once
 #include "eiface.h"
 
+#include <gcroot.h>
+
+using namespace SourceSDK::Core::Interfaces::Server;
 
 class CSourceSDKServerGameClients : public IServerGameClients
 {
@@ -25,4 +28,6 @@ public:
 	void NetworkIDValidated( const char *pszUserName, const char *pszNetworkID ) override;
 
 	CPlayerState *GetPlayerState( edict_t *player ) override;
+
+	gcroot<M_IServerGameClients^> m_pServerGameClients;
 };

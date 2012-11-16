@@ -85,6 +85,7 @@
     <ClInclude Include="..\shared\ConCommandWrapper.h" />
     <ClInclude Include="..\shared\ConsoleManager.h" />
     <ClInclude Include="..\shared\CVarWrapper.h" />
+    <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="EdictWrapper.h" />
     <ClInclude Include="GlobalVarsWrapper.h" />
     <ClInclude Include="NetworkStringTableContainerWrapper.h" />
@@ -158,6 +159,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SourceSDK.Core.Interfaces\SourceSDK.Core.Interfaces.csproj">
       <Project>{6196c2a4-b79e-4aef-ba81-e35201b6fbee}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SourceSDK.Core\SourceSDK.Core.csproj">
+      <Project>{8b0aa30e-f56b-4e68-adc4-e5bb35a6ebb8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

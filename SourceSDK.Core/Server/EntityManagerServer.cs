@@ -26,13 +26,22 @@ namespace SourceSDK.Core.Server
 
         Dictionary<Type, ServerClass> _EntityClasses = new Dictionary<Type, ServerClass>();
 
+        List<int> _EntSerials = new List<int>();
+
         public IServerClass[] ServerClasses { get; protected set; }
+
+        public const int MaxEntites = (1<<12);
 
         [ImportingConstructor]
         public EntityManagerServer(NI_VEngineServer engine, NI_ConsoleManager console)
         {
             _EngineServer = engine;
             _ConsoleManager = console;
+
+            Random rand = new Random();
+
+            for (int x = 0; x < MaxEntites; ++x)
+                _EntSerials.Add(rand.Next() & 0x7fff);
         }
 
         public bool ParseAllEntities(string mapEntites)
@@ -66,6 +75,11 @@ namespace SourceSDK.Core.Server
 
         }
 
+        public void PostClientMessagesSent()
+        {
+
+        }
+
         public void CleanupDeleteList()
         {
             foreach (var e in _DeleteList)
@@ -93,7 +107,28 @@ namespace SourceSDK.Core.Server
 
         }
 
+        public T FindEntity<T>(IEdict edict) where T : class
+        {
+            foreach (var e in _EntityList)
+            {
+                if (e.Edict.Equals(edict))
+                    return e as T;
+            }
+
+            return null;
+        }
+
+        public T CreatePlayer<T>(IEdict edict) where T : class
+        {
+            return CreateEntity("player", edict) as T;
+        }
+
         public BaseEntityServer CreateEntity(String className, int index = -1)
+        {
+            return CreateEntity(className, null, index);
+        }
+
+        private BaseEntityServer CreateEntity(String className, IEdict edict, int index = -1)
         {
             BaseEntityServer ent = null;
 
@@ -108,8 +143,26 @@ namespace SourceSDK.Core.Server
                 return null;
             }
 
-            _EngineServer.CreateEdict(ent, index);
+            if (edict == null)
+                _EngineServer.CreateEdict(ent, index);
+            else
+                ent.Edict = edict;
+
             _EntityList.Add(ent);
+
+            ent.PostCreate();
+
+            if (ent.IsServerOnly)
+            {
+                Debug.Assert(false); //todo fix to work
+                ent.Edict.SetSlotAndSerial(1, -1);
+            }
+            else
+            {
+                int slot = _EngineServer.IndexOfEdict(ent.Edict);
+                ent.Edict.SetSlotAndSerial(slot, _EntSerials[slot]);
+            }
+
             return ent;
         }
 
@@ -229,8 +282,5 @@ namespace SourceSDK.Core.Server
  
             return true;
         }
-
-    
-
     }
 }

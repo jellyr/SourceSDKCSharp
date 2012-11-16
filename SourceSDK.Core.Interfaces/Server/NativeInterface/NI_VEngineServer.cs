@@ -15,5 +15,7 @@ namespace SourceSDK.Core.Interfaces.Server
         void CreateEdict(IEntity serverEntity, int index = -1);
 
         void RemoveEdict(IEdict edict);
+
+        int IndexOfEdict(IEdict edict);
     }
 }

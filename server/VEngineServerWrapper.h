@@ -19,6 +19,13 @@ public:
 		
 	virtual void RemoveEdict(IEdict^ edict);
 
+	virtual int IndexOfEdict(IEdict^ edict);
+
+	IVEngineServer* Get()
+	{
+		return m_pEngine;
+	}
+
 private:
 	IVEngineServer* m_pEngine;
 };

@@ -5,7 +5,5 @@ using System.Text;
 
 namespace SourceSDK.Core.Interfaces.Client
 {
-    public interface IStandardRecvProxies
-    {
-    }
+
 }

@@ -155,21 +155,6 @@ namespace SourceSDK.Core.Client
             
         }
 
-        public void InitSprite(IEngineSprite sprite, string loadname)
-        {
-            
-        }
-
-        public void ShutdownSprite(IEngineSprite sprite)
-        {
-            
-        }
-
-        public int GetSpriteSize()
-        {
-            return 0;
-        }
-
         public void VoiceStatus(int entindex, bool talking)
         {
             
@@ -180,19 +165,74 @@ namespace SourceSDK.Core.Client
             
         }
 
+        ClientFrameStage _CurFrameStage;
+
         public void FrameStageNotify(ClientFrameStage curStage)
         {
-            
+	        _CurFrameStage = curStage;
+
+	        switch (curStage)
+	        {
+	        default:
+		        break;
+
+            case ClientFrameStage.FRAME_RENDER_START:
+			    // Last thing before rendering, run simulation.
+			    OnRenderStart();
+		        break;
+
+            case ClientFrameStage.FRAME_RENDER_END:
+			    OnRenderEnd();
+		        break;
+
+            case ClientFrameStage.FRAME_NET_UPDATE_START:
+                //// disabled all recomputations while we update entities
+                //C_BaseEntity::EnableAbsRecomputations( false );
+                //C_BaseEntity::SetAbsQueriesValid( false );
+                //Interpolation_SetLastPacketTimeStamp( engine->GetLastTimeStamp() );
+                //partition->SuppressLists( PARTITION_ALL_CLIENT_EDICTS, true );
+		        break;
+
+            case ClientFrameStage.FRAME_NET_UPDATE_END:
+                //ProcessCacheUsedMaterials();
+
+                //// reenable abs recomputation since now all entities have been updated
+                //C_BaseEntity::EnableAbsRecomputations( true );
+                //C_BaseEntity::SetAbsQueriesValid( true );
+                //partition->SuppressLists( PARTITION_ALL_CLIENT_EDICTS, false );
+		        break;
+
+            case ClientFrameStage.FRAME_NET_UPDATE_POSTDATAUPDATE_START:
+		        break;
+
+            case ClientFrameStage.FRAME_NET_UPDATE_POSTDATAUPDATE_END:
+                //// Let prediction copy off pristine data
+                //prediction->PostEntityPacketReceived();
+                //HLTVCamera()->PostEntityPacketReceived();
+		        break;
+
+            case ClientFrameStage.FRAME_START:
+                //// Mark the frame as open for client fx additions
+                //SetFXCreationAllowed( true );
+                //SetBeamCreationAllowed( true );
+                //C_BaseEntity::CheckCLInterpChanged();
+		        break;
+	        }            
+        }
+
+        private void OnRenderEnd()
+        {
+
+        }
+
+        private void OnRenderStart()
+        {
+
         }
 
         public bool DispatchUserMessage(int msgType, byte[] data)
         {
             return false;
-        }
-
-        public IStandardRecvProxies[] GetStandardRecvProxies()
-        {
-            return null;
         }
 
         public bool GetPlayerView(ref M_ViewSetup playerView)

@@ -28,6 +28,9 @@
     <Filter Include="Source Files\valve">
       <UniqueIdentifier>{1de247eb-75b8-4d4e-b063-4008cde61116}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\native">
+      <UniqueIdentifier>{0dd84a7b-cc57-4598-8f1a-24f429bf887c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stdafx.h">
@@ -74,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="GlobalVarsWrapper.h">
       <Filter>Source Files\wrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Source Files\native</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

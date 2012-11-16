@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SourceSDK.Core.Interfaces.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,5 +28,11 @@ namespace SourceSDK.Core.Interfaces.Server
         IServerClass[] ServerClasses { get; }
 
         bool GenerateServerClasses();
+
+        void PostClientMessagesSent();
+
+        T FindEntity<T>(IEdict edict) where T : class;
+
+        T CreatePlayer<T>(IEdict edict) where T : class;
     }
 }

@@ -18,6 +18,9 @@
 
 #include "igameevents.h"
 
+#include "serverGameEnts.h"
+#include "serverGameClients.h"
+
 // Holds global variables shared between engine and game.
 CGlobalVars *gpGlobals;
 
@@ -37,6 +40,19 @@ public:
 	{
 	}
 };
+
+CSourceSDKServer::CSourceSDKServer()
+{
+	m_pGameEnts = new CSourceSDKServerGameEnts();
+	m_pGameClients = new CSourceSDKServerGameClients();
+}
+
+CSourceSDKServer::~CSourceSDKServer()
+{
+	delete m_pGameEnts;
+	delete m_pGameClients;
+}
+
 
 bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfaceFn physicsFactory, CreateInterfaceFn fileSystemFactory, CGlobalVars *pGlobals)
 {
@@ -79,13 +95,10 @@ bool CSourceSDKServer::DLLInit(CreateInterfaceFn appSystemFactory, CreateInterfa
 	auto assembly = Assembly::LoadFile(workingDir + "SourceSDK.Core.dll");
 	auto type = assembly->GetType("SourceSDK.Core.Entry");
 
-	auto args = gcnew cli::array<Object^, 1>(1);
-	args[0] = sii;
+	SourceSDK::Core::Entry::ServerInit(sii);
 
-	type->InvokeMember(gcnew String("ServerInit"), BindingFlags::Public|BindingFlags::Static|BindingFlags::InvokeMethod, nullptr, nullptr, args);
-
-
-
+	m_pGameClients->m_pServerGameClients = sii->ServerGameClients;
+	m_pGameEnts->m_pServerGameEnts = sii->ServerGameEnts;
 
 
 //	// init each (seperated for ease of debugging)
@@ -351,4 +364,15 @@ void CSourceSDKServer::InvalidateMdlCache()
 
 void CSourceSDKServer::OnQueryCvarValueFinished(QueryCvarCookie_t iCookie, edict_t *pPlayerEntity, EQueryCvarValueStatus eStatus, const char *pCvarName, const char *pCvarValue)
 {
+}
+
+
+void* CSourceSDKServer::CreateInterface(const std::string &szName)
+{
+	if (szName == INTERFACEVERSION_SERVERGAMEENTS)
+		return m_pGameEnts;
+	else if (szName == INTERFACEVERSION_SERVERGAMECLIENTS)
+		return m_pGameClients;
+
+	return nullptr;
 }

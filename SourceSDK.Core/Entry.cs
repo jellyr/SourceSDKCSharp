@@ -27,6 +27,12 @@ namespace SourceSDK.Core
 
     public class Entry
     {
+        public static void GetPlayerLimits(ref int minplayers, ref int maxplayers, ref int defaultMaxPlayers)
+        {
+            minplayers = defaultMaxPlayers = 2;
+            maxplayers = 16;
+        }
+
         public static void ClientInit(IClientInitInterfaces initInterfaces)
         {
             MefClient.Init(Assembly.GetExecutingAssembly());

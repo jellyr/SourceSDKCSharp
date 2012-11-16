@@ -39,6 +39,10 @@ namespace SourceSDK.Core.Interfaces.Server
             return ObjectCap.FCAP_ACROSS_TRANSITION;
         }
 
+        public void PostCreate()
+        {
+        }
+
         public virtual void Activate()
         {
         }
@@ -71,6 +75,12 @@ namespace SourceSDK.Core.Interfaces.Server
         {
             get;
             set;
+        }
+
+        public bool IsServerOnly
+        {
+            get;
+            protected set;
         }
     }
 }

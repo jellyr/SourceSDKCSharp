@@ -76,7 +76,6 @@ namespace SourceSDK.Core.Interfaces.Client
 
 	    bool DispatchUserMessage(int msgType, byte[] data);
 
-        IStandardRecvProxies[] GetStandardRecvProxies();
         bool GetPlayerView(ref M_ViewSetup playerView);
     }
 }

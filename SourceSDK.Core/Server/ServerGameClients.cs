@@ -1,5 +1,6 @@
 ﻿using SourceSDK.Core.Interfaces.Server;
 using SourceSDK.Core.Interfaces.Shared;
+using SourceSDK.Entities.Server.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -12,9 +13,12 @@ namespace SourceSDK.Core.Server
     [Export(typeof(M_IServerGameClients))]
     class ServerGameClients : M_IServerGameClients
     {
-        public void GetPlayerLimits(ref int minplayers, ref int maxplayers, ref int defaultMaxPlayers)
+        IEntityManager _EntityManager;
+
+        [ImportingConstructor]
+        public ServerGameClients(IEntityManager entMng)
         {
-            
+            _EntityManager = entMng;
         }
 
         public bool ClientConnect(IEdict pEntity, string name, string address, ref string reject)
@@ -24,22 +28,37 @@ namespace SourceSDK.Core.Server
 
         public void ClientActive(IEdict entity, bool bLoadGame)
         {
-            
+            var ent = _EntityManager.FindEntity<BasePlayer>(entity);
+
+            if (ent == null)
+                return;
+
+            ent.InitalSpawn();
+            ent.Spawn();
         }
 
         public void ClientDisconnect(IEdict entity)
         {
-            
+            var ent = _EntityManager.FindEntity<BasePlayer>(entity);
+
+            if (ent == null)
+                return;
+
+            ent.Disconnect();
         }
 
-        public void ClientPutInServer(IEdict entity, string playername)
+        public void ClientPutInServer(IEdict entity, string playerName)
         {
-            
+            var player = _EntityManager.CreatePlayer<BasePlayer>(entity);
+            player.PlayerName = playerName;
         }
 
         public void ClientCommand(IEdict entity, string[] args)
         {
-            
+            var ent = _EntityManager.FindEntity<BasePlayer>(entity);
+
+            if (ent != null)
+                ent.ClientCommand(args);
         }
 
         public void SetCommandClient(int index)
@@ -64,7 +83,7 @@ namespace SourceSDK.Core.Server
 
         public void PostClientMessagesSent()
         {
-            
+            _EntityManager.PostClientMessagesSent();
         }
 
         public void ClientEarPosition(IEdict pEntity, ref Interfaces.Shared.M_Vector earOrigin)
@@ -89,7 +108,12 @@ namespace SourceSDK.Core.Server
 
         public IPlayerState GetPlayerState(IEdict player)
         {
-            return null;
+            var p = _EntityManager.FindEntity<BasePlayer>(player);
+
+            if (p == null)
+                return null;
+
+            return p.PlayerState;
         }
     }
 }

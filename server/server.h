@@ -17,11 +17,15 @@ typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
 //IServerTools
 //IGameMovement
 
-
+class CSourceSDKServerGameEnts;
+class CSourceSDKServerGameClients;
 
 class CSourceSDKServer : public IServerGameDLL
 {
 public:
+	CSourceSDKServer();
+	~CSourceSDKServer();
+
 	// Initialize the game (one-time call when the DLL is first loaded )
 	// Return false if there is an error during startup.
 	bool DLLInit(CreateInterfaceFn engineFactory, CreateInterfaceFn physicsFactory, CreateInterfaceFn fileSystemFactory, CGlobalVars *pGlobals) override;
@@ -115,8 +119,14 @@ public:
 	void OnQueryCvarValueFinished(QueryCvarCookie_t iCookie, edict_t *pPlayerEntity, EQueryCvarValueStatus eStatus, const char *pCvarName, const char *pCvarValue) override;
 
 
+
+	void* CreateInterface(const std::string &szName);
+
 	gcroot<SourceSDK::Core::Interfaces::Server::IServerInitInterfaces^> ServerInterfaces;
 
 private:
 	std::string m_szGameDesc;
+
+	CSourceSDKServerGameEnts *m_pGameEnts;
+	CSourceSDKServerGameClients *m_pGameClients;
 };

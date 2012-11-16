@@ -59,6 +59,10 @@
       <Project>{6196c2a4-b79e-4aef-ba81-e35201b6fbee}</Project>
       <Name>SourceSDK.Core.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SourceSDK.Entities.Server\SourceSDK.Entities.Server.csproj">
+      <Project>{304d4f1f-9bb3-487b-a34e-d6215e248722}</Project>
+      <Name>SourceSDK.Entities.Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
